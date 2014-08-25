@@ -2,40 +2,16 @@ production:
     # Default log level is info
     loglevel: _env:LOGLEVEL:info
     # By default, the registry acts standalone (eg: doesn't query the index)
-    standalone: _env:STANDALONE:true
-    # The default endpoint to use (if NOT standalone) is index.docker.io
-    index_endpoint: _env:INDEX_ENDPOINT:https://index.docker.io
+    standalone: True
     # Storage redirect is disabled
-    storage_redirect: _env:STORAGE_REDIRECT
+    storage_redirect: false
     # Token auth is enabled (if NOT standalone)
-    disable_token_auth: _env:DISABLE_TOKEN_AUTH
+    disable_token_auth: true
     # No priv key
     privileged_key: _env:PRIVILEGED_KEY
-    # No search backend
-    search_backend: _env:SEARCH_BACKEND
+    search_backend: _env:SEARCH_BACKEND:sqlalchemy
     # SQLite search backend
     sqlalchemy_index_database: _env:SQLALCHEMY_INDEX_DATABASE:sqlite:////tmp/docker-registry.db
-
-    # Mirroring is not enabled
-    mirroring:
-        source: _env:MIRROR_SOURCE # https://registry-1.docker.io
-        source_index: _env:MIRROR_SOURCE_INDEX # https://index.docker.io
-        tags_cache_ttl: _env:MIRROR_TAGS_CACHE_TTL:172800 # seconds
-
-    cache:
-        host: _env:CACHE_REDIS_HOST
-        port: _env:CACHE_REDIS_PORT
-        db: _env:CACHE_REDIS_DB:0
-        password: _env:CACHE_REDIS_PASSWORD
-
-    # Enabling LRU cache for small files
-    # This speeds up read/write on small files
-    # when using a remote storage backend (like S3).
-    cache_lru:
-        host: _env:CACHE_LRU_REDIS_HOST
-        port: _env:CACHE_LRU_REDIS_PORT
-        db: _env:CACHE_LRU_REDIS_DB:0
-        password: _env:CACHE_LRU_REDIS_PASSWORD
 
     # Enabling these options makes the Registry send an email on each code Exception
     email_exceptions:
@@ -49,11 +25,9 @@ production:
 
     # Enable bugsnag (set the API key)
     bugsnag: _env:BUGSNAG
-    storage_path: _env:STORAGE_PATH:/prod
+    storage_path: _env:STORAGE_PATH:/docker-registry
 
-    search_backend: _env:SEARCH_BACKEND:sqlalchemy
     storage: swift
-    storage_path: _env:STORAGE_PATH:/registry
     # keystone authorization
     swift_authurl: _env:ORBIT_AUTH_URL
     swift_container: _env:ORBIT_CONTAINER

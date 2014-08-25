@@ -1,9 +1,8 @@
 # VERSION 0.1
-# DOCKER-VERSION  0.7.3
 # AUTHOR:         John Leach <john@brightbox.co.uk>
-# DESCRIPTION:    Image with docker-registry project and dependecies
+# DESCRIPTION:    Image with docker-registry project and dependecies for use with Brightbox Orbit
 # TO_BUILD:       docker build -rm -t registry .
-# TO_RUN:         docker run -p 5000:5000 registry
+# TO_RUN:         docker run e ORBIT_AUTH_URL=https://orbit.brightbox.com/v1/acc-xxxxx -e ORBIT_USERNAME=cli-yyyyy -e ORBIT_PASSWORD=secret -e ORBIT_CONTAINER=docker_registry -p 5000:5000 registry
 
 # Latest Ubuntu LTS
 FROM registry:0.7.3
@@ -19,6 +18,6 @@ env SETTINGS_FLAVOR production
 
 expose 5000
 
-cmd exec docker-registry
+CMD ["docker-registry"]
 
 
