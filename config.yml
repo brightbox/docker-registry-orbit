@@ -28,10 +28,9 @@ production:
     storage_path: _env:STORAGE_PATH:/docker-registry
 
     storage: swift
-    # keystone authorization
-    swift_authurl: _env:ORBIT_AUTH_URL
+    swift_authurl: _env:ORBIT_AUTH_URL:https://orbit.brightbox.com/v1
     swift_container: _env:ORBIT_CONTAINER
-    swift_user: _env:ORBIT_USERNAME
-    swift_password: _env:ORBIT_PASSWORD
+    swift_user: _env:CLIENT_ID
+    swift_password: _env:CLIENT_SECRET
     swift_auth_version: 1
 
